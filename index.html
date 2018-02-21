@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login Page</title>
+  <meta charset="utf-8" />
+  <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Welcome to SEAMS: THE BEST CHAT ON THE PLANET</h1>
+  <div class="container">
+    <input id="txtEmail" type="email" placeholder="Email" />
+
+    <input id="txtPassword" type="password" placeholder="Password" />
+    <button id="btnLogin" class="btn btn-action">log in</button>
+
+    <button id="btnSignUp" class="btn btn-secondary">Sign Up</button>
+
+    <button id="btnLogout" class="btn btn-action hide">log Out</button>
+  </div>
+  <br />
+  <div id="userDiv"></div>"
+  <br><br>
+  <h1>Profile Info</h1>
+  <table>
+    <tr>
+      <td><label><b>First Name</b></label></td>
+      <td><input type="text" placeholder="Enter First Name" id="firstName" required></td>
+    </tr>
+    <tr>
+      <td><label><b>Last Name</b></label></td>
+      <td><input type="text" placeholder="Enter Last Name" id="lastName" required></td>
+    </tr>
+    <tr>
+      <td><label><b>User Name</b></label></td>
+      <td><input type="text" placeholder="Enter User Name" id="userName" required></td>
+    </tr>
+  </table>
+  <button id="btnSaveProfile">Save</button>
+
+
+
+</body>
+
+</html>
