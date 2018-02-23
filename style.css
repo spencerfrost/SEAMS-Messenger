@@ -1,0 +1,56 @@
+#app {
+  border: 1px solid black;
+  padding: 2%;
+  border-radius: 10px;
+  background: -webkit-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
+	background: -moz-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
+	background: -ms-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
+	background: -o-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
+	background: radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
+	background-size: 10px 10px, 10px 10px, 100% 100%;
+	background-position: 1px 1px, 0px 0px, center center;
+	top: 0;
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+}
+#welcome {
+  margin-top: 0;
+  margin-bottom: 2%;
+}
+#slogan {
+  margin: 0;
+  font-size: 1.2em;
+}
+#header {
+  margin-bottom: 2.5%;
+}
+#messaging {
+  width: 96%;
+  margin: 2%;
+  border: 1px solid black;
+  height: 200px;
+}
+.placeholder {
+  text-align: center;
+  height: 200px;
+  margin-top: 85px;
+}
+#currentUserDiv {
+  position: relative;
+  top: 0%;
+  left: 0%;
+  margin-bottom: 2%;
+}
+#login {
+  position: relative;
+  top: 0%;
+  left: 0%;
+  margin-bottom: 2%;
+}
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
