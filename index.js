@@ -13,6 +13,7 @@ var base = firebase.database();
 var auth = firebase.auth();
 var storage = firebase.storage();
 var storageRef = storage.ref();
+var msgCount;
 
 window.addEventListener("DOMContentLoaded", onDeviceReady, false);
 
@@ -24,6 +25,7 @@ function onDeviceReady() {
   document.getElementById('btnSaveProfile').addEventListener('click', saveProfile, false);
   document.getElementById('btnEditProfile').addEventListener('click', editProfile, false);
   document.getElementById('btnBackToMessage').addEventListener('click', backToMessage, false);
+  document.getElementById('btnMsgSend').addEventListener('click', sendMessage, false);
   auth.onAuthStateChanged(function(user) {
     if (user) {
       currentUser = user;
@@ -34,6 +36,7 @@ function onDeviceReady() {
     }
   });
   getOnlineUsers();
+  getMessages();
 }
 
 function createAccount() {
@@ -178,4 +181,42 @@ function getOnlineUsers() {
       }
     });
   });
+}
+
+function sendMessage() {
+  var now = new Date();
+  var messageObj = {
+    message: document.querySelector('#msgInput').value,
+    timestamp: now.toString(),
+    user: auth.currentUser.uid
+  };
+  console.log(messageObj);
+  var messageID = now;
+  base.ref('messages').push(messageObj).then(function(error) {
+    if (error) {
+      console.error(error);
+    } else {
+      console.log("Message sent");
+      alert("Message sent");
+    }
+  });
+}
+
+function getMessages() {
+  var messages = base.ref("messages");
+  msgCount = 0;
+  messages.on('value', function(snapshot) {
+    console.log(snapshot.val());
+    snapshot.forEach(function(childSnapshot) {
+      displayMessages(childSnapshot.val());
+      // console.log(childSnapshot.val().lastChild);
+    });
+  });
+}
+
+function displayMessages(msg) {
+
+  var feed = document.querySelector("#msgFeed");
+  feed.innerHTML += "<div style='bottom: 0;' class='msgs' id='msg" + msgCount + "' >" + msg.message + "</div>";
+  msgCount++;
 }

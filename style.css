@@ -1,17 +1,26 @@
+body {
+  background: #1976D2;
+}
 #app {
-  border: 1px solid black;
-  padding: 2%;
-  border-radius: 10px;
-  background: -webkit-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
-	background: -moz-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
-	background: -ms-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
-	background: -o-radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
-	background: radial-gradient(center, circle, rgba(255,255,255,.35), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 21%), -webkit-radial-gradient(center, circle, rgba(0,0,0,.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 21%), -webkit-radial-gradient(center, circle farthest-corner, #f0f0f0, #c0c0c0);
-	background-size: 10px 10px, 10px 10px, 100% 100%;
-	background-position: 1px 1px, 0px 0px, center center;
-	top: 0;
+  box-sizing: border-box;
+  margin: 100px auto;
+  width: 400px;
+  padding-bottom: 2px;
+  background: white;
+  box-shadow: 0 5px 15px 1px rgba(0, 0, 0, 0.6), 0 0 200px 1px rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
   font-family: 'Roboto', sans-serif;
-  position: absolute;
+}
+.btn{
+  background: rgba(00, 100, 200, .3);
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.btn:hover{
+  border: 1px solid white;
+  background: rgba(100, 100, 200, .3);
 }
 #welcome {
   margin-top: 0;
@@ -23,6 +32,8 @@
 }
 #header {
   margin-bottom: 2.5%;
+  padding-left: 2%;
+
 }
 #messaging {
   width: 96%;
@@ -30,16 +41,65 @@
   border: 1px solid black;
   height: 200px;
 }
-.placeholder {
-  text-align: center;
-  height: 200px;
-  margin-top: 85px;
+#msgContainer {
+  height: 165px;
+  overflow: scroll;
+}
+#msgFeed {
+  display: block;
+  background-color: white;
+  position: relative;
+  bottom: 250px;
+  margin: 0;
+  overflow: hidden;
+
+}
+.msgs {
+  position: relative;
+}
+#msgSpan{
+  width: 100%;
+}
+#msgInput{
+  width: 83.5%;
+  padding: 12px 20px;
+  height: 35px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+#msgInput:focus {
+    border: 1px solid #555;
+}
+#btnMsgSend{
+  width: 16.5%;
+  padding: 8px 0px;
+  text-decoration: none;
+  margin-left: -4px;
+  background: rgba(00, 100, 200, .3);
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+}
+#btnMsgSend:hover{
+  border: 1px solid white;
+  background: rgba(100, 100, 200, .3);
 }
 #currentUserDiv {
   position: relative;
   top: 0%;
   left: 0%;
   margin-bottom: 2%;
+  padding: 2%;
+  background: #eee;
+  font-size: .7em;
+}
+#currentUser .btn {
+  font-size: .7em;
 }
 #login {
   position: relative;
@@ -47,6 +107,11 @@
   left: 0%;
   margin-bottom: 2%;
 }
+#onlineUsersDiv{
+  padding-left: 2%;
+}
+
+
 .show {
   display: block;
 }
