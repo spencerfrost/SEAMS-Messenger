@@ -26,6 +26,14 @@ function onDeviceReady() {
   document.getElementById('btnEditProfile').addEventListener('click', editProfile, false);
   document.getElementById('btnBackToMessage').addEventListener('click', backToMessage, false);
   document.getElementById('btnMsgSend').addEventListener('click', sendMessage, false);
+  document.getElementById('msgInput').addEventListener("keyup", function(event) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      sendMessage();
+    }
+  });
   auth.onAuthStateChanged(function(user) {
     if (user) {
       currentUser = user;
@@ -185,38 +193,48 @@ function getOnlineUsers() {
 
 function sendMessage() {
   var now = new Date();
+  var input = document.querySelector('#msgInput');
   var messageObj = {
-    message: document.querySelector('#msgInput').value,
+    message: input.value,
     timestamp: now.toString(),
-    user: auth.currentUser.uid
+    user: auth.currentUser.uid,
+    email: auth.currentUser.email
   };
-  console.log(messageObj);
   var messageID = now;
-  base.ref('messages').push(messageObj).then(function(error) {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log("Message sent");
-      alert("Message sent");
-    }
+  base.ref('messages').push(messageObj, function(){
+    console.log("Message Sent!");
   });
+  //Clear input box
+  input.value = '';
 }
 
 function getMessages() {
   var messages = base.ref("messages");
   msgCount = 0;
-  messages.on('value', function(snapshot) {
-    console.log(snapshot.val());
-    snapshot.forEach(function(childSnapshot) {
-      displayMessages(childSnapshot.val());
-      // console.log(childSnapshot.val().lastChild);
+  messages.on('child_added', function(snapshot) {
+    var msg = snapshot.val();
+    var test = msg.message;
+    var email;
+    var msgUsernameElement = document.createElement("b");
+    firebase.database().ref('/users/' + msg.user).once('value').then(function(snapshot) {
+      msgUsernameElement.textContent = "User: " + snapshot.val().email;
     });
+    var msgTextElement = document.createElement("p");
+    msgTextElement.textContent = msg.message;
+    var msgElement = document.createElement("div");
+    msgElement.appendChild(msgUsernameElement);
+    msgElement.appendChild(msgTextElement);
+    msgElement.classList.add('message');
+    if (msg.user == currentUser.uid) {
+      msgElement.classList.add('ownMessage');
+    }
+    document.getElementById("msgFeed").appendChild(msgElement);
+    msgCount++;
+    scrollToBottom('msgContainer');
   });
 }
 
-function displayMessages(msg) {
-
-  var feed = document.querySelector("#msgFeed");
-  feed.innerHTML += "<div style='bottom: 0;' class='msgs' id='msg" + msgCount + "' >" + msg.message + "</div>";
-  msgCount++;
+function scrollToBottom (id) {
+   var div = document.getElementById(id);
+   div.scrollTop = div.scrollHeight - div.clientHeight;
 }

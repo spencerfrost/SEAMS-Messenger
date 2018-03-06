@@ -43,13 +43,13 @@ body {
 }
 #msgContainer {
   height: 165px;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 #msgFeed {
   display: block;
   background-color: white;
   position: relative;
-  bottom: 250px;
   margin: 0;
   overflow: hidden;
 
@@ -70,7 +70,16 @@ body {
   transition: 0.5s;
   outline: none;
 }
-
+.message {
+  border: 1px solid grey;
+  padding: 2%;
+}
+.message p {
+  margin: 0;
+}
+.ownMessage {
+  text-align: right;
+}
 #msgInput:focus {
     border: 1px solid #555;
 }
@@ -105,12 +114,14 @@ body {
   position: relative;
   top: 0%;
   left: 0%;
-  margin-bottom: 2%;
+  padding: 2%;
 }
 #onlineUsersDiv{
   padding-left: 2%;
 }
-
+#profile {
+  padding: 0 2%;
+}
 
 .show {
   display: block;
