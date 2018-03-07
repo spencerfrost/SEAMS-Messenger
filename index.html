@@ -6,6 +6,8 @@
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
 </head>
 
 <body>
@@ -40,13 +42,15 @@
 
 
     <div id="messaging" class="container show">
+      <input id="btnVolume" class="btn" type="button" value='&#128266;' />
       <div id="msgContainer">
         <div id="msgFeed"></div>
       </div>
       <span id="msgSpan">
         <input id="msgInput" type="text" />
-        <input id="btnMsgSend" class="btn" type="button" value="Send"/>
+        <input id="btnMsgSend" class="btn" type="button" value="Send" disabled/>
       </span>
+      <audio src="beep.wav" autostart="false" width="0" height="0" id="beep" enablejavascript="true">
     </div>
 
     <div id="profile" class="container hide">
@@ -73,9 +77,9 @@
 
     </div>
 
-    <div id="onlineUsersDiv" class="container show">
+    <div id="onlineUsersContainer" class="container show">
       <h4>Online Users</h4>
-      <ul id="onlineUsers"></ul>
+      <div id="onlineUsersDiv"></div>
     </div>
   </div>
   <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>

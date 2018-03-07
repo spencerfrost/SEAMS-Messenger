@@ -16,6 +16,10 @@ var storageRef = storage.ref();
 var msgCount;
 
 window.addEventListener("DOMContentLoaded", onDeviceReady, false);
+window.onbeforeunload = function(event) {
+    // do stuff here
+    signOut();
+};
 
 
 function onDeviceReady() {
@@ -33,14 +37,23 @@ function onDeviceReady() {
     if (event.keyCode === 13) {
       sendMessage();
     }
+    if (this.value != '' && auth.currentUser) {
+      enable('#btnMsgSend');
+    } else {
+      disable('#btnMsgSend');
+    }
   });
   auth.onAuthStateChanged(function(user) {
     if (user) {
       currentUser = user;
-      showHide('currentUserDiv', 'login');
+      showElement('currentUserDiv');
+      hideElement('login');
+      showElement('onlineUsersDiv');
       document.getElementById('currentUser').innerHTML = user.email;
     } else {
-      showHide('login', 'currentUserDiv');
+      showElement('login');
+      hideElement('currentUserDiv');
+      hideElement('onlineUsersDiv');
     }
   });
   getOnlineUsers();
@@ -132,8 +145,10 @@ function signOut() {
 }
 
 function editProfile() {
-  showHide('profile', 'messaging');
-  showHide('btnBackToMessage', 'btnEditProfile');
+  showElement('profile');
+  hideElement('messaging');
+  showElement('btnBackToMessage');
+  hideElement('btnEditProfile');
   firebase.database().ref('/users/' + currentUser.uid).once('value').then(
     function(snapshot) {
       document.getElementById('firstName').value = snapshot.val().firstName;
@@ -157,67 +172,104 @@ function saveProfile() {
       } else {
         console.log("Profile Updated");
         alert("Profile updated", '', 'Success');
-        showHide('messaging', 'profile');
+        showElement('messaging');
+        hideElement('profile');
       }
     }
   );
 }
 
-function showHide(toShow, toHide) {
+function showElement(toShow) {
   document.getElementById(toShow).classList.add('show');
-  document.getElementById(toHide).classList.add('hide');
   document.getElementById(toShow).classList.remove('hide');
+}
+
+function hideElement(toHide) {
+  document.getElementById(toHide).classList.add('hide');
   document.getElementById(toHide).classList.remove('show');
 }
 
 function backToMessage() {
-  showHide('btnEditProfile', 'btnBackToMessage');
-  showHide('messaging', 'profile');
+  showElement('btnEditProfile');
+  hideElement('btnBackToMessage');
+  showElement('messaging');
+  hideElement('profile');
 }
 
 function getOnlineUsers() {
-  var list = document.getElementById("onlineUsers");
-  list.innerHTML = "";
+  var onlineUsersDiv = document.getElementById("onlineUsersDiv");
+  onlineUsersDiv.innerHTML = '';
   var users = base.ref("users");
   users.on('value', function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
       var user = childSnapshot.val();
-      if (user.online && (list.innerHTML.search(user.userName) == -1)) {
-        // list.innerHTML += "<li id='" + user.nodeValue + "'>" + user.userName + "</li>";
-        list.innerHTML += "<li>" + user.userName + "</li>";
-        console.log(user.userName);
+      if (user.online) {
+        var u = document.createElement("b");
+        u.textContent = user.userName;
+        var uElement = document.createElement("div");
+        uElement.appendChild(u);
+        document.getElementById("onlineUsersDiv").appendChild(uElement);
       }
     });
   });
+
+
+  // users.on('child_changed', function(snapshot) {
+  //   var msg = snapshot.val();
+  //   var test = msg.message;
+  //   var msgUsernameElement = document.createElement("b");
+  //   firebase.database().ref('/users/' + msg.user).once('value').then(function(snapshot) {
+  //     msgUsernameElement.textContent = "User: " + snapshot.val().userName;
+  //   });
+  //   var msgElement = document.createElement("div");
+  //   msgElement.appendChild(msgUsernameElement);
+  //   msgElement.classList.add('message');
+  //   if (msg.user == currentUser.uid) {
+  //     msgElement.classList.add('ownMessage');
+  //   }
+  //   document.getElementById("msgFeed").appendChild(msgElement);
+  // });
+
+
+
 }
 
 function sendMessage() {
-  var now = new Date();
   var input = document.querySelector('#msgInput');
-  var messageObj = {
-    message: input.value,
-    timestamp: now.toString(),
-    user: auth.currentUser.uid,
-    email: auth.currentUser.email
-  };
-  var messageID = now;
-  base.ref('messages').push(messageObj, function(){
-    console.log("Message Sent!");
-  });
-  //Clear input box
-  input.value = '';
+  if (auth.currentUser) {
+    if (input != '') {
+      var now = new Date();
+      var messageObj = {
+        message: input.value,
+        timestamp: now.toString(),
+        user: auth.currentUser.uid,
+      };
+      var messageID = now;
+      base.ref('messages').push(messageObj, function(){
+        console.log("Message Sent!");
+      });
+      //Clear input box
+      input.value = '';
+    } else {
+      alert("Please enter a message to send");
+    }
+  } else {
+    alert("Please log in to send messages");
+  }
+
 }
 
 function getMessages() {
   var messages = base.ref("messages");
   msgCount = 0;
   messages.on('child_added', function(snapshot) {
+    var sound = document.getElementById('beep');
+    sound.play();
     var msg = snapshot.val();
     var test = msg.message;
-    var email;
     var msgUsernameElement = document.createElement("b");
     firebase.database().ref('/users/' + msg.user).once('value').then(function(snapshot) {
-      msgUsernameElement.textContent = "User: " + snapshot.val().email;
+      msgUsernameElement.textContent = "User: " + snapshot.val().userName;
     });
     var msgTextElement = document.createElement("p");
     msgTextElement.textContent = msg.message;
@@ -225,8 +277,10 @@ function getMessages() {
     msgElement.appendChild(msgUsernameElement);
     msgElement.appendChild(msgTextElement);
     msgElement.classList.add('message');
-    if (msg.user == currentUser.uid) {
-      msgElement.classList.add('ownMessage');
+    if(auth.currentUser){
+      if (msg.user == currentUser.uid) {
+        msgElement.classList.add('ownMessage');
+      }
     }
     document.getElementById("msgFeed").appendChild(msgElement);
     msgCount++;
@@ -234,7 +288,19 @@ function getMessages() {
   });
 }
 
+function PlaySound(soundObj) {
+  var sound = document.getElementById(soundObj);
+  sound.play();
+}
+
 function scrollToBottom (id) {
    var div = document.getElementById(id);
    div.scrollTop = div.scrollHeight - div.clientHeight;
+}
+
+function enable(element){
+  document.querySelector(element).disabled = false;
+}
+function disable(element){
+  document.querySelector(element).disabled = true;
 }
