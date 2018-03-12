@@ -45,15 +45,26 @@ function onDeviceReady() {
   });
   auth.onAuthStateChanged(function(user) {
     if (user) {
-      currentUser = user;
+      currentUser = auth.currentUser;
       showElement('currentUserDiv');
       hideElement('login');
       showElement('onlineUsersDiv');
       document.getElementById('currentUser').innerHTML = user.email;
+
+        firebase.database().ref('/users/' + currentUser.uid).once('value').then(
+          function(snapshot) {
+            if(snapshot.val().type == "admin")
+            {
+                  showElement("adminPanel");
+            }
+          }
+        );
+
     } else {
       showElement('login');
       hideElement('currentUserDiv');
       hideElement('onlineUsersDiv');
+      hideElement('adminPanel');
     }
   });
   getOnlineUsers();
