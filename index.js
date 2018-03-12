@@ -285,9 +285,19 @@ function getMessages() {
     var msgTextElement = document.createElement("p");
     msgTextElement.textContent = msg.message;
     var msgElement = document.createElement("div");
+    var msgDelete = document.createElement("div");
+
+    msgElement.id = "msg" + snapshot.key;
+    msgDelete.textContent = "DELETE";
+    msgDelete.style.color = "red";
+    msgDelete.style.cursor = "pointer";
+    msgElement.classList.add('message');
+    msgDelete.addEventListener('click', function(){
+      deleteMessage(snapshot.key);
+    });
     msgElement.appendChild(msgUsernameElement);
     msgElement.appendChild(msgTextElement);
-    msgElement.classList.add('message');
+    msgElement.appendChild(msgDelete);
     if(auth.currentUser){
       if (msg.user == currentUser.uid) {
         msgElement.classList.add('ownMessage');
@@ -297,6 +307,15 @@ function getMessages() {
     msgCount++;
     scrollToBottom('msgContainer');
   });
+}
+
+function deleteMessage(msgID) {
+  if (confirm('Are you sure you want to delete this message?')){
+      base.ref('messages').child(msgID).remove();
+      console.log("Message deleted");
+      var msgElement = document.getElementById('msg' + msgID)
+      msgElement.parentNode.removeChild(msgElement);
+  };
 }
 
 function PlaySound(soundObj) {
