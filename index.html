@@ -24,7 +24,9 @@
       <table>
         <tr>
           <td><label for="currentUser">Current user: </label></td>
-          <td><div id="currentUser"></div></td>
+          <td>
+            <div id="currentUser"></div>
+          </td>
           <td>&#9;</td>
           <td>
             <button id="btnEditProfile" class="btn show">Edit Profile</button>
@@ -42,7 +44,10 @@
 
 
     <div id="messaging" class="container show">
-      <input id="btnVolume" class="btn" type="button" value='&#128266;' />
+      <!-- <input id="btnVolume" class="btn" type="button" value='&#128266;' /> -->
+      <div id="tabs" class="w3-bar w3-black">
+        <button class="w3-bar-item w3-button" onclick="openTab('Main')">Main</button>
+      </div>
       <div id="msgContainer">
         <div id="msgFeed"></div>
       </div>

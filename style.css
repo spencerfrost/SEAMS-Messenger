@@ -33,14 +33,13 @@ body {
 #header {
   margin-bottom: 2.5%;
   padding-left: 2%;
-
 }
+
 #messaging {
   width: 96%;
   margin: 2%;
   border: 1px solid black;
-  height: 200px;
-  position: absolute;
+  height: 225px;
 }
 
 #msgContainer {
@@ -69,12 +68,14 @@ body {
   right: 0;
   z-index: 1;
 }
-#msgFeed {
-  display: block;
+.msgFeed {
+  display: none;
   background-color: white;
-  position: relative;
   margin: 0;
   overflow: hidden;
+}
+#msgFeedMain {
+  display: block;
 }
 .msgs {
   position: relative;
