@@ -39,20 +39,36 @@
       <h1 id="welcome">Welcome to SEAMS&trade;:</h1>
       <h2 id="slogan">"THE BEST CHAT ON THE PLANET"</h2>
     </div>
-  
+
     <div id="adminPanel" class="container hide">
         <h2>Admin Rights</h2>
 
     </div>
 
     <div id="messaging" class="container show">
-      <input id="btnVolume" class="btn" type="button" value='&#128266;' />
+      <!-- <input id="btnVolume" class="btn" type="button" value='&#128266;' /> -->
+      <div id="tabs" class="w3-bar w3-black">
+        <button class="w3-bar-item w3-button" onclick="openTab('Main')">Main</button>
+      </div>
       <div id="msgContainer">
         <div id="msgFeed"></div>
       </div>
       <span id="msgSpan">
         <input id="msgInput" type="text" />
+        <input id="btnEmoji" class="btn" type="button" value="☺" />
         <input id="btnMsgSend" class="btn" type="button" value="Send" disabled/>
+          <div id="pickEmoji" class="container hide">
+            <img src="emoji/smile.png" onclick="insertSmiley('(smile)')" />
+            <img src="emoji/xD.png" onclick="insertSmiley('(xD)')" />
+            <img src="emoji/angry.png" onclick="insertSmiley('(angry)')" />
+            <img src="emoji/disappointed.png" onclick="insertSmiley('(disappointed)')" />
+            <img src="emoji/sunglasses.png" onclick="insertSmiley('(sunglasses)')" />
+            <img src="emoji/nerd.png" onclick="insertSmiley('(nerd)')" />
+            <img src="emoji/sleepy.png" onclick="insertSmiley('(sleepy)')" />
+            <img src="emoji/thumbsup.png" onclick="insertSmiley('(thumbsup)')" />
+            <img src="emoji/thumbsdown.png" onclick="insertSmiley('(thumbsdown)')" />
+          </div>
+
       </span>
       <audio src="beep.wav" autostart="false" width="0" height="0" id="beep" enablejavascript="true">
     </div>
@@ -86,6 +102,7 @@
       <div id="onlineUsersDiv"></div>
     </div>
   </div>
+
   <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="index.js"></script>
