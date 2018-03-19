@@ -24,7 +24,9 @@
       <table>
         <tr>
           <td><label for="currentUser">Current user: </label></td>
-          <td><div id="currentUser"></div></td>
+          <td>
+            <div id="currentUser"></div>
+          </td>
           <td>&#9;</td>
           <td>
             <button id="btnEditProfile" class="btn show">Edit Profile</button>
@@ -42,13 +44,26 @@
 
 
     <div id="messaging" class="container show">
-      <input id="btnVolume" class="btn" type="button" value='&#128266;' />
-      <div id="msgContainer">
-        <div id="msgFeed"></div>
+      <!-- <input id="btnVolume" class="btn" type="button" value='&#128266;' /> -->
+      <div id="tabs" class="w3-bar w3-black">
+        <button class="tab" onclick="openTab('Main')">Main</button>
       </div>
+      <div id="msgContainer"></div>
       <span id="msgSpan">
         <input id="msgInput" type="text" />
+        <input id="btnEmoji" class="btn" type="button" value="☺" />
         <input id="btnMsgSend" class="btn" type="button" value="Send" disabled/>
+        <div id="pickEmoji" class="container hide">
+          <img src="emoji/smile.png" onclick="insertSmiley('&#x1F642;')" />
+          <img src="emoji/xD.png" onclick="insertSmiley('&#x1F606;')" />
+          <img src="emoji/angry.png" onclick="insertSmiley('&#x1F621;')" />
+          <img src="emoji/disappointed.png" onclick="insertSmiley('&#x1F613;')" />
+          <img src="emoji/sunglasses.png" onclick="insertSmiley('&#x1F60E;')" />
+          <img src="emoji/nerd.png" onclick="insertSmiley('&#x1F913;')" />
+          <img src="emoji/sleepy.png" onclick="insertSmiley('&#x1F634;')" />
+          <img src="emoji/thumbsup.png" onclick="insertSmiley('&#x1F44D;')" />
+          <img src="emoji/thumbsdown.png" onclick="insertSmiley('&#x1F44E;')" />
+          </div>
       </span>
       <audio src="beep.wav" autostart="false" width="0" height="0" id="beep" enablejavascript="true">
     </div>

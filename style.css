@@ -33,14 +33,13 @@ body {
 #header {
   margin-bottom: 2.5%;
   padding-left: 2%;
-
 }
+
 #messaging {
   width: 96%;
   margin: 2%;
   border: 1px solid black;
-  height: 200px;
-  position: absolute;
+  height: 225px;
 }
 
 #msgContainer {
@@ -69,12 +68,14 @@ body {
   right: 0;
   z-index: 1;
 }
-#msgFeed {
-  display: block;
+.msgFeed {
+  display: none;
   background-color: white;
-  position: relative;
   margin: 0;
   overflow: hidden;
+}
+#msgFeedMain {
+  display: block;
 }
 .msgs {
   position: relative;
@@ -83,7 +84,7 @@ body {
   width: 100%;
 }
 #msgInput{
-  width: 83.5%;
+  width: 75%;
   padding: 12px 20px;
   height: 35px;
   box-sizing: border-box;
@@ -151,4 +152,23 @@ body {
 
 .hide {
   display: none;
+}
+
+/*emoji*/
+#btnEmoji {
+  height: 35px;
+  margin-left: -4px;
+  background: rgba(00, 100, 200, .3);
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+}
+#pickEmoji {
+  float: right;
+  width:100px;
+  height: 100px;
+  background: rgba(00, 100, 200, .3);
+  border: 1px solid #999;
+  cursor: pointer;
 }
