@@ -2,46 +2,104 @@
 <html>
 
 <head>
-  <title>Login Page</title>
+  <title>SEAMS Messenger</title>
   <meta charset="utf-8" />
-  <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
-  <script src="index.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
 </head>
 
 <body>
-  <h1>Welcome to SEAMS: THE BEST CHAT ON THE PLANET</h1>
-  <div class="container">
-    <input id="txtEmail" type="email" placeholder="Email" />
+  <div id="app" class="container">
 
-    <input id="txtPassword" type="password" placeholder="Password" />
-    <button id="btnLogin" class="btn btn-action">log in</button>
+    <div id="login" class="container show">
+      <input id="txtEmail" type="email" placeholder="Email" />
+      <input id="txtPassword" type="password" placeholder="Password" />
+      <button id="btnLogin" class="btn">Log in</button>
+      <button id="btnReg" class="btn">Register</button>
+    </div>
 
-    <button id="btnSignUp" class="btn btn-secondary">Sign Up</button>
+    <div id="currentUserDiv" class="container hide">
+      <table>
+        <tr>
+          <td><label for="currentUser">Current user: </label></td>
+          <td>
+            <div id="currentUser"></div>
+          </td>
+          <td>&#9;</td>
+          <td>
+            <button id="btnEditProfile" class="btn show">Edit Profile</button>
+            <button id="btnBackToMessage" class="btn hide">Back</button>
+          </td>
+          <td><button id="btnLogout" class="btn">Log Out</button></td>
+        </tr>
+      </table>
+    </div>
 
-    <button id="btnLogout" class="btn btn-action hide">log Out</button>
+    <div id="header" class="container">
+      <h1 id="welcome">Welcome to SEAMS&trade;:</h1>
+      <h2 id="slogan">"THE BEST CHAT ON THE PLANET"</h2>
+    </div>
+
+
+    <div id="messaging" class="container show">
+      <!-- <input id="btnVolume" class="btn" type="button" value='&#128266;' /> -->
+      <div id="tabs" class="tabs">
+        <div id="tabMain" class="tab active" onclick="openTab('Main')"><div class="tabBox">Main</div></div>
+      </div>
+      <div id="msgContainer"></div>
+      <span id="msgSpan">
+        <input id="msgInput" type="text" />
+        <input id="btnEmoji" class="btn" type="button" value="☺" />
+        <input id="btnMsgSend" class="btn" type="button" value="Send" disabled/>
+        <div id="pickEmoji" class="container hide">
+          <img src="emoji/smile.png" onclick="insertSmiley('&#x1F642;')" />
+          <img src="emoji/xD.png" onclick="insertSmiley('&#x1F606;')" />
+          <img src="emoji/angry.png" onclick="insertSmiley('&#x1F621;')" />
+          <img src="emoji/disappointed.png" onclick="insertSmiley('&#x1F613;')" />
+          <img src="emoji/sunglasses.png" onclick="insertSmiley('&#x1F60E;')" />
+          <img src="emoji/nerd.png" onclick="insertSmiley('&#x1F913;')" />
+          <img src="emoji/sleepy.png" onclick="insertSmiley('&#x1F634;')" />
+          <img src="emoji/thumbsup.png" onclick="insertSmiley('&#x1F44D;')" />
+          <img src="emoji/thumbsdown.png" onclick="insertSmiley('&#x1F44E;')" />
+          </div>
+      </span>
+      <audio src="beep.wav" autostart="false" width="0" height="0" id="beep" enablejavascript="true">
+    </div>
+
+    <div id="profile" class="container hide">
+      <h1>Profile Info</h1>
+      <table>
+        <tr>
+          <td><label>First Name</label></td>
+          <td><input type="text" placeholder="Enter First Name" id="firstName" required></td>
+        </tr>
+        <tr>
+          <td><label>Last Name</label></td>
+          <td><input type="text" placeholder="Enter Last Name" id="lastName" required></td>
+        </tr>
+        <tr>
+          <td><label>User Name</label></td>
+          <td><input type="text" placeholder="Enter User Name" id="userName" required></td>
+        </tr>
+        <tr><td>&#9;</td></tr>
+        <tr>
+          <td><button id="btnSaveProfile">Save</button></td>
+          <td></td>
+        </tr>
+      </table>
+
+    </div>
+
+    <div id="onlineUsersContainer" class="container show">
+      <h4>Online Users</h4>
+      <div id="onlineUsersDiv"></div>
+    </div>
   </div>
-  <br />
-  <div id="userDiv"></div>"
-  <br><br>
-  <h1>Profile Info</h1>
-  <table>
-    <tr>
-      <td><label><b>First Name</b></label></td>
-      <td><input type="text" placeholder="Enter First Name" id="firstName" required></td>
-    </tr>
-    <tr>
-      <td><label><b>Last Name</b></label></td>
-      <td><input type="text" placeholder="Enter Last Name" id="lastName" required></td>
-    </tr>
-    <tr>
-      <td><label><b>User Name</b></label></td>
-      <td><input type="text" placeholder="Enter User Name" id="userName" required></td>
-    </tr>
-  </table>
-  <button id="btnSaveProfile">Save</button>
-
-
-
+  <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="index.js"></script>
 </body>
 
 </html>
