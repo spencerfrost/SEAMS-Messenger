@@ -1,147 +1,304 @@
 body {
   background: #1976D2;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: background 0.5s;
+  transition: background 0.5s;
 }
+
 #app {
-  box-sizing: border-box;
-  margin: 100px auto;
-  width: 400px;
-  padding-bottom: 2px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  left: 10px;
+  bottom: 10px;
   background: white;
-  box-shadow: 0 5px 15px 1px rgba(0, 0, 0, 0.6), 0 0 200px 1px rgba(255, 255, 255, 0.5);
-  border-radius: 2px;
+  border-radius: 10px;
+  padding: 20px;
   font-family: 'Roboto', sans-serif;
+  box-shadow: 0 5px 15px 1px rgba(0, 0, 0, 0.6), 0 0 200px 1px rgba(255, 255, 255, 0.5);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
-.btn{
-  background: rgba(00, 100, 200, .3);
-  outline: none;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  cursor: pointer;
-}
-.btn:hover{
-  border: 1px solid white;
-  background: rgba(100, 100, 200, .3);
-}
-#welcome {
-  margin-top: 0;
-  margin-bottom: 2%;
-}
-#slogan {
-  margin: 0;
-  font-size: 1.2em;
-}
+
+/************* HEADER *****************/
+
 #header {
-  margin-bottom: 2.5%;
-  padding-left: 2%;
+  padding: 0 1%;
+  margin-bottom: 5em;
 }
 
-#messaging {
-  width: 96%;
-  margin: 2%;
-  border: 1px solid black;
-  height: 225px;
+#seamsIcon {
+  background: url(logoWhite.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 99px;
+  height: 39px;
+  position: relative;
+  float: left;
 }
 
-#msgContainer {
-  height: 165px;
-  overflow-x: hidden;
-  overflow-y: visible;
-}
-#msgContainer::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
-}
-#msgContainer::-webkit-scrollbar{
-	width: 12px;
-	background-color: #F5F5F5;
-}
-#msgContainer::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #555;
-}
-#btnVolume {
-  font-size: 1em;
+#currentUserDiv,
+#login {
   position: relative;
-  top: 0;
-  right: 0;
-  z-index: 1;
+  float: right;
 }
-.msgFeed {
-  display: none;
-  background-color: white;
-  margin: 0;
-  overflow: hidden;
+
+#header .btn {
+  width: 100px;
+  height: 39px;
+  padding: 10px;
 }
-#msgFeedMain {
-  display: block;
-}
-.msgs {
-  position: relative;
-}
-#msgSpan{
-  width: 100%;
-}
-#msgInput{
-  width: 75%;
-  padding: 12px 20px;
-  height: 35px;
+
+#login input {
+  padding: 10.5px 10px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
 }
-.message {
-  border: 1px solid grey;
-  padding: 2%;
+
+#login input:focus {
+  border: 1px solid #666;
 }
-.message p {
-  margin: 0;
+
+#loginError, #msgError {
+  color: red;
+  font-size: 0.7rem;
+  position: absolute;
+  bottom: -0.9rem;
+  left: 0;
 }
-.ownMessage {
-  text-align: right;
-}
-#msgInput:focus {
-    border: 1px solid #555;
-}
-#btnMsgSend{
-  width: 16.5%;
-  padding: 8px 0px;
-  text-decoration: none;
-  margin-left: -4px;
-  background: rgba(00, 100, 200, .3);
+
+/************* BUTTONS ***************/
+
+.btn {
+  background: #1976D27F;
   outline: none;
-  border: 1px solid transparent;
+  border: 0;
   border-radius: 2px;
   cursor: pointer;
 }
-#btnMsgSend:hover:enabled{
-  border: 1px solid white;
-  background: rgba(100, 100, 200, .3);
+
+.btn:hover {
+  -webkit-box-shadow: 0px 1px 3px #666666;
+  -moz-box-shadow: 0px 1px 3px #666666;
+  box-shadow: 0px 1px 3px #666666;
 }
-#currentUserDiv {
+
+/************ MESSAGING ****************/
+
+#messaging {
+  width: 96%;
+  margin: 2%;
+  height: 70%;
   position: relative;
-  top: 0%;
-  left: 0%;
-  margin-bottom: 2%;
+}
+
+#msgContainer {
+  height: 85%;
+  overflow-x: hidden;
+  overflow-y: visible;
+  width: 85%;
+  display: flex;
+  float: left;
+  position: relative;
+  margin-bottom: 1px;
+  flex-direction: column-reverse;
+  border: 1px solid #bbb;
+}
+
+#msgContainer::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+#msgContainer::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
+
+#msgContainer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
+}
+
+.msgFeed {
+  display: none;
+  background-color: white;
+  margin: 0;
+  overflow: hidden;
+}
+
+#msgFeedMain {
+  display: block;
+}
+
+.msgs {
+  position: relative;
+}
+
+#msgSpan {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+#msgInput {
+  width: calc(88% - 39px);
+  padding: 8.5px 20px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  float: left;
+}
+
+.message {
+  border: 1px solid #ddd;
   padding: 2%;
+}
+
+.message p {
+  margin: 0;
+}
+
+.ownMessage {
+  text-align: right;
+}
+
+#msgInput:focus {
+  border: 1px solid #666;
+}
+
+#btnMsgSend {
+  width: 12%;
+  height: 35px;
+  padding: 8px 0px;
+  text-decoration: none;
+  border-radius: 2px;
+  cursor: pointer;
+  float: right;
+}
+
+/*************** EMOJI ******************/
+
+#btnEmoji {
+  height: 35px;
+  padding: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  float: left;
+  width: 37px;
+  margin: 0 1px;
+  position: relative;
+}
+
+#emojiImg {
+  width: 17px;
+  margin: 8.5px 9px;
+}
+
+#emojiDiv {
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  padding: .1rem;
+  background: #1976D27F;
+  border: 1px solid #999;
+}
+#emojiDiv img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/***************** TABS *******************/
+
+.tabs {
+  float: left;
+  height: 21px;
+  max-height: 21px;
+  padding: 0 0 0 0;
+  overflow: hidden;
+  display: block;
+  width: calc(100% - 210px);
+  padding-left: 2px;
+}
+
+.tab.inactive {
+  height: 20px;
+  overflow: visible;
+  float: left;
+  margin: 0 -15px 0 0;
+}
+
+.tab.inactive .tabBox {
   background: #eee;
-  font-size: .7em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  box-shadow: 0 0 2px #fff inset;
+  text-align: center;
+  padding: 0 25px 0 25px;
+  cursor: pointer;
+  transform: perspective(100px) rotateX(30deg);
 }
-#currentUser .btn {
-  font-size: .7em;
+
+.tab {
+  height: 22px;
+  overflow: visible;
+  float: left;
+  margin: 0 -15px 0 0;
 }
-#login {
+
+.tab .tabBox {
+  background: #eee;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  box-shadow: 0 0 2px #fff inset;
+  text-align: center;
+  padding: 0 25px 0 25px;
+  cursor: pointer;
+  transform: perspective(100px) rotateX(30deg);
+}
+
+.tab.active {
+  z-index: 40;
   position: relative;
-  top: 0%;
-  left: 0%;
-  padding: 2%;
+  padding: 15px 0px 15px -1px;
+  overflow: visible;
 }
-#onlineUsersContainer{
-  padding-left: 2%;
+
+.tab.active .tabBox {
+  background-color: #fff;
+  background: linear-gradient(top, #ccc, #ddd 3%, rgba(#eee, 0.5));
+  box-shadow: 0 0 2px 0 #fff inset;
 }
+
+/************ OTHER *************/
+
+#onlineUsersContainer {
+  float: right;
+  height: 85%;
+  width: 14%;
+  border: 1px solid #ccc;
+  margin-bottom: 2px;
+}
+#onlineUsersContainer h5 {
+  text-align: center;
+  margin: 1em 0;
+}
+#onlineUsersDiv {
+  padding: 0 .5rem;
+}
+
 #profile {
   padding: 0 2%;
 }
@@ -150,25 +307,10 @@ body {
   display: block;
 }
 
-.hide {
-  display: none;
+.showInline {
+  display: inline;
 }
 
-/*emoji*/
-#btnEmoji {
-  height: 35px;
-  margin-left: -4px;
-  background: rgba(00, 100, 200, .3);
-  outline: none;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  cursor: pointer;
-}
-#pickEmoji {
-  float: right;
-  width:100px;
-  height: 100px;
-  background: rgba(00, 100, 200, .3);
-  border: 1px solid #999;
-  cursor: pointer;
+.hide {
+  display: none;
 }

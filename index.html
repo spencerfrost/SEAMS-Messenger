@@ -4,67 +4,77 @@
 <head>
   <title>SEAMS Messenger</title>
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="style.css">
+  <link id='pagestyle' rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
 </head>
 
 <body>
   <div id="app" class="container">
+    <div id="header">
+      
+      <div id="seamsIcon"></div>
 
-    <div id="login" class="container show">
-      <input id="txtEmail" type="email" placeholder="Email" />
-      <input id="txtPassword" type="password" placeholder="Password" />
-      <button id="btnLogin" class="btn">Log in</button>
-      <button id="btnReg" class="btn">Register</button>
+      <div id="login" class="container showInline">
+        <div>
+          <input id="txtEmail" type="email" placeholder="Email" />
+          <input id="txtPassword" type="password" placeholder="Password" />
+          <button id="btnLogin" class="btn">Login</button>
+          <button id="btnReg" class="btn">Register</button>
+        </div>
+        <div id="loginError" class="hide">Error message</div>
+      </div>
+  
+      <div id="currentUserDiv" class="container hide">
+        <table>
+          <tr>
+            <td><label for="currentUser">Current user: </label></td>
+            <td>
+              <div id="currentUser"></div>
+            </td>
+            <td>&#9;</td>
+            <td>
+              <button id="btnEditProfile" class="btn show">Edit Profile</button>
+              <button id="btnBackToMessage" class="btn hide">Back</button>
+            </td>
+            <td><button id="btnLogout" class="btn">Log Out</button></td>
+          </tr>
+        </table>
+      </div>
     </div>
-
-    <div id="currentUserDiv" class="container hide">
-      <table>
-        <tr>
-          <td><label for="currentUser">Current user: </label></td>
-          <td>
-            <div id="currentUser"></div>
-          </td>
-          <td>&#9;</td>
-          <td>
-            <button id="btnEditProfile" class="btn show">Edit Profile</button>
-            <button id="btnBackToMessage" class="btn hide">Back</button>
-          </td>
-          <td><button id="btnLogout" class="btn">Log Out</button></td>
-        </tr>
-      </table>
-    </div>
-
-    <div id="header" class="container">
-      <h1 id="welcome">Welcome to SEAMS&trade;:</h1>
-      <h2 id="slogan">"THE BEST CHAT ON THE PLANET"</h2>
-    </div>
-
+    
 
     <div id="messaging" class="container show">
-      <!-- <input id="btnVolume" class="btn" type="button" value='&#128266;' /> -->
-      <div id="tabs" class="w3-bar w3-black">
-        <button class="tab" onclick="openTab('Main')">Main</button>
+      <div id="tabs" class="tabs">
+        <div id="tabMain" class="tab active" onclick="openTab('Main')"><div class="tabBox">Main</div></div>
       </div>
       <div id="msgContainer"></div>
-      <span id="msgSpan">
-        <input id="msgInput" type="text" />
-        <input id="btnEmoji" class="btn" type="button" value="☺" />
-        <input id="btnMsgSend" class="btn" type="button" value="Send" disabled/>
-        <div id="pickEmoji" class="container hide">
-          <img src="emoji/smile.png" onclick="insertSmiley('&#x1F642;')" />
-          <img src="emoji/xD.png" onclick="insertSmiley('&#x1F606;')" />
-          <img src="emoji/angry.png" onclick="insertSmiley('&#x1F621;')" />
-          <img src="emoji/disappointed.png" onclick="insertSmiley('&#x1F613;')" />
-          <img src="emoji/sunglasses.png" onclick="insertSmiley('&#x1F60E;')" />
-          <img src="emoji/nerd.png" onclick="insertSmiley('&#x1F913;')" />
-          <img src="emoji/sleepy.png" onclick="insertSmiley('&#x1F634;')" />
-          <img src="emoji/thumbsup.png" onclick="insertSmiley('&#x1F44D;')" />
-          <img src="emoji/thumbsdown.png" onclick="insertSmiley('&#x1F44E;')" />
+      <div id="onlineUsersContainer" class="container show">
+        <h5>Online Users</h5>
+        <div id="onlineUsersDiv"></div>
+      </div>
+      <div id="msgSpan">
+        <input id="msgInput" type="text" placeholder="Type a message..."/>
+        <div id="msgError" class="hide">Error</div>
+        <div id="btnEmoji" class="btn" type="button" disabled>
+          <img id="emojiImg" src="emoji/smile.png"/>
+          <div id="emojiDiv" class="container hide">
+              <img src="emoji/smile.png" onclick="insertSmiley('&#x1F642;')" />
+              <img src="emoji/xD.png" onclick="insertSmiley('&#x1F606;')" />
+              <img src="emoji/angry.png" onclick="insertSmiley('&#x1F621;')" />
+              <img src="emoji/disappointed.png" onclick="insertSmiley('&#x1F613;')" />
+              <img src="emoji/sunglasses.png" onclick="insertSmiley('&#x1F60E;')" />
+              <img src="emoji/nerd.png" onclick="insertSmiley('&#x1F913;')" />
+              <img src="emoji/sleepy.png" onclick="insertSmiley('&#x1F634;')" />
+              <img src="emoji/thumbsup.png" onclick="insertSmiley('&#x1F44D;')" />
+              <img src="emoji/thumbsdown.png" onclick="insertSmiley('&#x1F44E;')" />
           </div>
-      </span>
+        </div>
+        <input id="btnMsgSend" class="btn" type="button" value="Send" disabled/>        
+      </div>
+        
       <audio src="beep.wav" autostart="false" width="0" height="0" id="beep" enablejavascript="true">
     </div>
 
@@ -90,11 +100,29 @@
         </tr>
       </table>
 
-    </div>
-
-    <div id="onlineUsersContainer" class="container show">
-      <h4>Online Users</h4>
-      <div id="onlineUsersDiv"></div>
+      <h1>App Appearance</h1>
+      <table>
+        <tr>
+          <td><label>Theme:</label></td>
+          <td>
+            Light<input id="radioLight" class='styleRadio' type="radio" name="radioTheme" value="light"> 
+            Dark<input id="radioDark" class='styleRadio' type="radio" name="radioTheme" value="dark">
+          </td>
+        </tr>
+        <tr>
+          <td><label>Colour:</label></td>
+          <td> 
+            Blue<input id="radioBlue" class='styleRadio' type="radio" name="radioColour" value="blue">
+            Orange<input id="radioOrange" class='styleRadio' type="radio" name="radioColour" value="orange">
+            Pink<input id="radioPink" class='styleRadio' type="radio" name="radioColour" value="pink">
+          </td>
+        </tr>
+        <tr><td>&#9;</td></tr>
+        <tr>
+          <td><button id="btnSaveAppearance">Save</button></td>
+          <td></td>
+        </tr>
+      </table>
     </div>
   </div>
   <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
