@@ -45,8 +45,18 @@
       </div>
     </div>
     
+    
 
     <div id="messaging" class="container show">
+        <div>
+          <h3>Welcome to SEAMS Messenger! <i class="fas fa-question-circle" onclick="toggleHelp()"></i></h3>
+          <ul class="hide" id="help">
+            <li>To begin, please register a new account and start sending messages!</li>
+            <li>Please edit your profile once registered to assign a username to your account.</li>
+            <li>If you'd like to send a private message, just click on that user name to open a new tab!</li>
+            <li>Thanks for user SEAMS Messenger!</li>
+          </ul>
+        </div>
       <div id="tabs" class="tabs">
         <div id="tabMain" class="tab active" onclick="openTab('Main')"><div class="tabBox">Main</div></div>
       </div>
@@ -74,9 +84,9 @@
         </div>
         <input id="btnMsgSend" class="btn" type="button" value="Send" disabled/>        
       </div>
-        
-      <audio src="beep.wav" autostart="false" width="0" height="0" id="beep" enablejavascript="true">
+      
     </div>
+    
 
     <div id="profile" class="container hide">
       <h1>Profile Info</h1>

@@ -346,6 +346,11 @@ function getOnlineUsers() {
   users.on('child_added', function (childSnapshot) {
     var u = document.createElement("b");
     u.textContent = childSnapshot.val();
+    u.id = childSnapshot.key;
+    u.addEventListener('click', function () {
+      privateMessage(u.id);
+    });
+    u.style = "cursor: pointer;"
     var uElement = document.createElement("div");
     uElement.appendChild(u);
     document.getElementById("onlineUsersDiv").appendChild(uElement);
@@ -643,6 +648,10 @@ function insertSmiley(smiley) {
   var currentText = document.getElementById("msgInput");
   currentText.value += smiley;
   currentText.focus();
+}
+
+function toggleHelp() {
+  document.querySelector('#help').classList.toggle('hide');
 }
 
 function enable(element) {
